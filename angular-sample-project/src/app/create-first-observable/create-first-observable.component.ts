@@ -11,6 +11,8 @@ export class CreateFirstObservableComponent implements OnInit, OnDestroy {
   //Way #1: Unsubscribe kardan : create a public and global variable
   public intervalSubscription: Subscription | any;
   //hala unjayi ke subscribe kardamo behesh assign mikonam
+  //Way #2 use subsink library too kill all observable in one line code
+
   constructor() { }
 
   ngOnInit(): void {
