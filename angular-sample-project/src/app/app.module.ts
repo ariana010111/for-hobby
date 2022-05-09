@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { CreateFirstObservableComponent } from './create-first-observable/create-first-observable.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CreateFirstObservableComponent
   ],
   imports: [
     BrowserModule,
