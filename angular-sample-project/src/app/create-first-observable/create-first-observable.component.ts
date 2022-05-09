@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable, Observer} from "rxjs";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Observable, Observer, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-create-first-observable',
   templateUrl: './create-first-observable.component.html',
   styleUrls: ['./create-first-observable.component.scss']
 })
-export class CreateFirstObservableComponent implements OnInit {
-
+export class CreateFirstObservableComponent implements OnInit, OnDestroy {
+//baraye handle kardn memory leak va tamoom kardan subscribe bayad killesh konim ke 2 rah vojood dare
+  //Way #1: Unsubscribe kardan : create a public and global variable
+  public intervalSubscription: Subscription | any;
+  //hala unjayi ke subscribe kardamo behesh assign mikonam
   constructor() { }
 
   ngOnInit(): void {
@@ -21,7 +24,7 @@ export class CreateFirstObservableComponent implements OnInit {
 
     });
     // chon inja observable ha eager nistan va lazy hastan taghriri too barname ijad nemishe va bayad subscribe konim
-    interval$.subscribe(
+    this.intervalSubscription = interval$.subscribe(
       (val) => {console.log(val);}
       //inja behesh migam man midoonam ye value ro daryaft mikonam inja bia valueyi ke daryaft kardamo too console behem namayesh bede
     );
@@ -52,5 +55,7 @@ export class CreateFirstObservableComponent implements OnInit {
       () => {console.log('completed');}
     );
   }
-
+     ngOnDestroy() {
+    this.intervalSubscription.unsubscribe();
+}
 }
